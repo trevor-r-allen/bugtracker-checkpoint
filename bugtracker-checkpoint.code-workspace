@@ -1,11 +1,10 @@
-
 {
   "folders": [
     {
-      "path": "bugtracker-checkpoint.client"
+      "path": "client"
     },
     {
-      "path": "bugtracker-checkpoint.server"
+      "path": "server"
     }
   ],
   "settings": {
