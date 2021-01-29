@@ -1,0 +1,16 @@
+
+  {
+    "name": "bugtracker-checkpoint",
+    "version": "1.0.0",
+    "scripts": {
+      "build": "npm run setup:client && npm run setup:server && npm run build:client",
+      "setup:client": "cd bugtracker-checkpoint.client && npm i",
+      "setup:server": "cd bugtracker-checkpoint.server && npm i",
+      "build:client": "npm run --prefix bugtracker-checkpoint.client build",
+      "start": "node bugtracker-checkpoint.server/index.js"
+    },
+    "engines": {
+      "node": "^14.15.4"
+    }
+  }
+  
