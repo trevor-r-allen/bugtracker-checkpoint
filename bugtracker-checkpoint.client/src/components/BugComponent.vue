@@ -7,7 +7,7 @@
     <td v-if="bugProp.creator">
       {{ bugProp.creator.name }}
     </td>
-    <td>{{ bugProp.closed }}</td>
+    <td>{{ bugProp.closed ? 'Closed' : 'Open' }}</td>
     <td>{{ bugProp.closedDate }}</td>
   </tr>
 </template>
