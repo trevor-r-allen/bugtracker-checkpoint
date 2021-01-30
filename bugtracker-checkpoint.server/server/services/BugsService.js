@@ -33,8 +33,10 @@ class BugsService {
   }
 
   async findOneAndClose(id, userId) {
+    const date = new Date().toLocaleDateString()
     const bug = await dbContext.Bugs.findById({ _id: id, creatorId: userId })
     bug.closed = true
+    bug.closedDate = date
     const closed = await dbContext.Bugs.findOneAndUpdate({ _id: id, creatorId: userId }, bug, { new: true }).populate('creator')
     if (!closed) {
       throw new BadRequest('You are not the creator or this bug does not exist')
