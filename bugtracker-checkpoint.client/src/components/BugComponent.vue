@@ -1,13 +1,15 @@
 <template>
-  <th scope="row">
-    {{ bugProp.title }}
-  </th>
-  <td>{{ bugProp.description }}</td>
-  <td v-if="bugProp.creator">
-    {{ bugProp.creator.name }}
-  </td>
-  <td>{{ bugProp.closed }}</td>
-  <td>{{ bugProp.closedDate }}</td>
+  <tr>
+    <th scope="row">
+      {{ bugProp.title }}
+    </th>
+    <td>{{ bugProp.description }}</td>
+    <td v-if="bugProp.creator">
+      {{ bugProp.creator.name }}
+    </td>
+    <td>{{ bugProp.closed }}</td>
+    <td>{{ bugProp.closedDate }}</td>
+  </tr>
 </template>
 
 <script>

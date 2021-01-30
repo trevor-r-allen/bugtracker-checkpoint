@@ -3,12 +3,12 @@ import { BadRequest } from '../utils/Errors'
 
 class BugsService {
   async find(query = {}) {
-    const bugs = await dbContext.Bugs.find(query)
+    const bugs = await dbContext.Bugs.find(query).populate('creator')
     return bugs
   }
 
   async findById(id) {
-    const bug = await dbContext.Bugs.findById(id)
+    const bug = await dbContext.Bugs.findById(id).populate('creator')
     if (!bug) {
       throw new BadRequest('Invalid Id')
     }
@@ -16,7 +16,8 @@ class BugsService {
   }
 
   async create(body) {
-    return await dbContext.Bugs.create(body)
+    const newBug = await dbContext.Bugs.create(body)
+    return newBug.populate('creator')
   }
 
   async findOneAndUpdate(id, body) {
@@ -38,7 +39,7 @@ class BugsService {
     if (!closed) {
       throw new BadRequest('You are not the creator or this bug does not exist')
     }
-    return bug
+    return closed
   }
 }
 export const bugsService = new BugsService()

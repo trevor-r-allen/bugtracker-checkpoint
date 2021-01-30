@@ -1,5 +1,5 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center container-fluid">
+  <div class="home container">
     <div class="row">
       <div class="col">
         <h1>Bug Tracker</h1>
@@ -8,7 +8,7 @@
         </button>
       </div>
     </div>
-    <table class="table row">
+    <table class="table table-hover row">
       <thead>
         <tr>
           <th scope="col">
@@ -18,13 +18,13 @@
             Description
           </th>
           <th scope="col">
-            Creator
-          </th>
-          <th scope="col">
             Status
           </th>
           <th scope="col">
             Closed Date
+          </th>
+          <th scope="col">
+            Creator
           </th>
         </tr>
       </thead>
