@@ -1,5 +1,6 @@
 import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
+import { notesService } from '../services/NotesService'
 
 export class NotesController extends BaseController {
   constructor() {
@@ -11,12 +12,13 @@ export class NotesController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.create)
       .put('/:id', this.edit)
-      .delete('/:id', this.close)
+      .delete('/:id', this.delete)
   }
 
   async getAll(req, res, next) {
     try {
-      return res.send()
+      const data = await notesService.find(req.query)
+      return res.send(data)
     } catch (error) {
       next(error)
     }
@@ -24,7 +26,8 @@ export class NotesController extends BaseController {
 
   async getById(req, res, next) {
     try {
-      return res.send(req.params.id)
+      const data = await notesService.findById(req.params.id)
+      return res.send(data)
     } catch (error) {
       next(error)
     }
@@ -32,9 +35,10 @@ export class NotesController extends BaseController {
 
   async create(req, res, next) {
     try {
-    // NOTE NEVER TRUST THE CLIENT TO ADD THE CREATOR ID
+      // NOTE NEVER TRUST THE CLIENT TO ADD THE CREATOR ID
       req.body.creatorId = req.userInfo.id
-      res.send(req.body)
+      const data = await notesService.create(req.body)
+      res.send(data)
     } catch (error) {
       next(error)
     }
@@ -42,17 +46,19 @@ export class NotesController extends BaseController {
 
   async edit(req, res, next) {
     try {
-    // NOTE NEVER TRUST THE CLIENT TO ADD THE CREATOR ID
+      // NOTE NEVER TRUST THE CLIENT TO ADD THE CREATOR ID
       req.body.creatorId = req.userInfo.id
-      res.send(req.params.id, req.body)
+      const data = await notesService.findOneAndUpdate(req.params.id, req.body)
+      res.send(data)
     } catch (error) {
       next(error)
     }
   }
 
-  async close(req, res, next) {
+  async delete(req, res, next) {
     try {
-      res.send(req.params.id)
+      const data = await notesService.delete(req.params.id, req.userInfo.id)
+      res.send(data)
     } catch (error) {
       next(error)
     }

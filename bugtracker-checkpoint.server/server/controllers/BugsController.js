@@ -59,7 +59,7 @@ export class BugsController extends BaseController {
     try {
       // NOTE NEVER TRUST THE CLIENT TO ADD THE CREATOR ID
       req.body.creatorId = req.userInfo.id
-      const data = await bugsService.findOneAndClose(req.params.id, req.body)
+      const data = await bugsService.findOneAndUpdate(req.params.id, req.body)
       res.send(data)
     } catch (error) {
       next(error)
@@ -68,7 +68,7 @@ export class BugsController extends BaseController {
 
   async close(req, res, next) {
     try {
-      const data = await bugsService.findOneAndClose(req.params.id)
+      const data = await bugsService.findOneAndClose(req.params.id, req.userInfo.id)
       res.send(data)
     } catch (error) {
       next(error)

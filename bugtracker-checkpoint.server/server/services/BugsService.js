@@ -26,17 +26,19 @@ class BugsService {
     // }
     const updated = await dbContext.Bugs.findOneAndUpdate({ _id: id, creatorId: body.creatorId, closed: false }, body, { new: true }).populate('creator')
     if (!updated) {
-      throw new BadRequest('You are not the creator or this bug does not exist')
+      throw new BadRequest('You are not the creator, this bug does not exist, or this bug is closed')
     }
     return updated
   }
 
-  async findOneAndClose(id, body) {
-    body.closed = true
-    const closed = await dbContext.Bugs.findOneAndUpdate({ _id: id, creatorId: body.creatorId }, body, { new: true }).populate('creator')
+  async findOneAndClose(id, userId) {
+    const bug = await dbContext.Bugs.findById({ _id: id, creatorId: userId })
+    bug.closed = true
+    const closed = await dbContext.Bugs.findOneAndUpdate({ _id: id, creatorId: userId }, bug, { new: true }).populate('creator')
     if (!closed) {
       throw new BadRequest('You are not the creator or this bug does not exist')
     }
+    return bug
   }
 }
 export const bugsService = new BugsService()
