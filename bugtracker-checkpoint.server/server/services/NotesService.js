@@ -8,30 +8,39 @@ class NotesService {
   }
 
   async findById(id) {
-    const value = await dbContext.Notes.findById(id)
-    if (!value) {
+    const note = await dbContext.Notes.findById(id)
+    if (!note) {
       throw new BadRequest('Invalid Id')
     }
-    return value
+    return note
+  }
+
+  async findByBugId(id) {
+    const notes = await dbContext.Notes.find({ bug: id }).populate('creator')
+    if (!notes) {
+      throw new BadRequest('Invalid Id')
+    }
+    return notes
   }
 
   async create(body) {
     return await dbContext.Notes.create(body)
   }
 
-  findOneAndUpdate(id, body) {
-    const updated = dbContext.Notes.findOneAndUpdate({ _id: id, creatorId: body.creatorId }, body, { new: true }).populate('creator')
+  async findOneAndUpdate(id, body) {
+    const updated = await dbContext.Notes.findOneAndUpdate({ _id: id, creatorId: body.creatorId }, body, { new: true }).populate('creator')
     if (!updated) {
       throw new BadRequest('You are not the creator or this note does not exist')
     }
     return updated
   }
 
-  delete(id, userId) {
-    const note = dbContext.Notes.findOneAndRemove({ _id: id, creatorId: userId })
+  async delete(id, userId) {
+    const note = await dbContext.Notes.findOneAndRemove({ _id: id, creatorId: userId })
     if (!note) {
       throw new BadRequest('You are not the creator, or this is not a valid note')
     }
+    return 'successfully deleted'
   }
 }
 

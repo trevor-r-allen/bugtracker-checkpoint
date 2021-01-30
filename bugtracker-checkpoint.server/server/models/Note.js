@@ -4,7 +4,7 @@ const ObjectId = mongoose.Types.ObjectId
 
 const Note = new Schema(
   {
-    content: { type: String, required: true },
+    body: { type: String, required: true },
     bug: { type: ObjectId, ref: 'Bug', required: true },
     flagged: { type: String, enum: ['pending', 'completed', 'rejected'] },
     creatorId: { type: String, ref: 'Account', required: true }
