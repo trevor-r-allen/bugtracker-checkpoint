@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr :class="bugProp.closed ? 'table-danger' : ''">
     <th scope="row">
       <router-link :to="{name: 'BugDetails', params: {id: bugProp.id}}">
         {{ bugProp.title }}
@@ -10,7 +10,7 @@
       {{ bugProp.creator.name }}
     </td>
     <td>{{ bugProp.closed ? 'Closed' : 'Open' }}</td>
-    <td>{{ bugProp.closedDate }}</td>
+    <td>{{ bugProp.updatedAt }}</td>
   </tr>
 </template>
 

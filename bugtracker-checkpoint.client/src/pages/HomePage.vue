@@ -52,7 +52,7 @@
             Status
           </th>
           <th scope="col">
-            Closed Date
+            Last Updated
           </th>
         </tr>
       </thead>
