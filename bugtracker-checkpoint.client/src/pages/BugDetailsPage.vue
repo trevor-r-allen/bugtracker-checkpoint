@@ -3,10 +3,13 @@
     <div class="row justify-content-center">
       <div class="col-11">
         <div class="card text-dark border-info bg-transparent mb-3">
-          <div class="card-header d-flex justify-content-between">
-            <h6> Bug Details </h6> <button type="button" class="btn btn-light btn-outline-info align-self-end">
+          <div class="card-header  border-info d-flex justify-content-between">
+            <h6> Bug Details </h6>
+            <!-- Button trigger modal -->
+            <button v-if="!state.activeBug.closed" type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editBugModal">
               Edit
             </button>
+            <EditBugModal />
           </div>
           <div class="card-body">
             <h5 class="card-title">
@@ -18,9 +21,8 @@
             <p>Status: {{ state.activeBug.closed ? 'Closed' : 'Open' }} <span v-if="state.activeBug.closedDate"> on {{ state.activeBug.closedDate }}</span></p>
             <p class="card-text">
               {{ state.activeBug.description }}
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione optio corrupti neque similique eveniet fugit at iste incidunt unde? Quasi, tempore quo delectus iste voluptas maiores placeat magnam? Repudiandae, voluptatem?
             </p>
-            <button v-if="!state.activeBug.closed" type="button" class="btn btn-danger" @click="closeBug">
+            <button v-if="!state.activeBug.closed && (state.activeBug.creatorId === state.account.id)" type="button" class="btn btn-danger" @click="closeBug">
               Close Bug
             </button>
           </div>
@@ -59,6 +61,7 @@ export default {
   setup() {
     const route = useRoute()
     const state = reactive({
+      account: computed(() => AppState.account),
       activeBug: computed(() => AppState.activeBug),
       notes: computed(() => AppState.notes)
     })

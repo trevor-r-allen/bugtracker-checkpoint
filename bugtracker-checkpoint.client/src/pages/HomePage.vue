@@ -36,8 +36,8 @@
         </div>
       </div>
     </div>
-    <table class="table table-hover table-bordered table-info">
-      <thead>
+    <table class="table table-bordered table-info">
+      <thead class="table-dark">
         <tr>
           <th scope="col">
             Title
@@ -56,7 +56,7 @@
           </th>
         </tr>
       </thead>
-      <tbody id="BugTableBody">
+      <tbody id="BugTableBody" class="table-hover">
         <BugComponent v-for="bug in state.filteredBugs" :key="bug.id" :bug-prop="bug" />
       </tbody>
     </table>
