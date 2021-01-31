@@ -25,6 +25,7 @@ class BugsService {
     try {
       const res = await api.post('api/bugs', bug)
       AppState.bugs.push(res.data)
+      AppState.activeBug = res.data
     } catch (error) {
       logger.error(error)
     }

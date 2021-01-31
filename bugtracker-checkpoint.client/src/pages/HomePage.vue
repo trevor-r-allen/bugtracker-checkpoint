@@ -1,13 +1,15 @@
 <template>
   <div class="home container">
-    <div class="row">
+    <div class="row my-1">
       <div class="col-5">
         <h1>Bug Tracker</h1>
       </div>
       <div class="col offset-5 d-flex align-items-center justify-content-around">
-        <button type="button" class="btn btn-primary">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#createBugModal">
           Create
         </button>
+        <CreateBugModal />
       </div>
       <div class="col-12 d-flex align-items-center justify-content-end">
         <div class="dropdown">
