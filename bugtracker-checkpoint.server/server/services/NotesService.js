@@ -3,12 +3,12 @@ import { BadRequest } from '../utils/Errors'
 
 class NotesService {
   async find(query = {}) {
-    const notes = await dbContext.Notes.find(query)
+    const notes = await dbContext.Notes.find(query).populate('creator')
     return notes
   }
 
   async findById(id) {
-    const note = await dbContext.Notes.findById(id)
+    const note = await dbContext.Notes.findById(id).populate('creator')
     if (!note) {
       throw new BadRequest('Invalid Id')
     }
@@ -24,7 +24,8 @@ class NotesService {
   }
 
   async create(body) {
-    return await dbContext.Notes.create(body)
+    const newNote = await dbContext.Notes.create(body)
+    return newNote.populate('creator')
   }
 
   async findOneAndUpdate(id, body) {

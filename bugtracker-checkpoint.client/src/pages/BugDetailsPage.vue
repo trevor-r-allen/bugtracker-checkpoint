@@ -3,8 +3,13 @@
     <div class="row">
       <div class="col-12">
         <h1>{{ state.activeBug.title }}</h1>
+        <h6 v-if="state.activeBug.creator">
+          Created by: {{ state.activeBug.creator.name }}
+        </h6>
+        <p>Status: {{ state.activeBug.closed ? 'Closed' : 'Open' }} <span v-if="state.activeBug.closedDate"> on {{ state.activeBug.closedDate }}</span></p>
       </div>
       <div class="col-12">
+        <h6>Details:</h6>
         <p>{{ state.activeBug.description }}</p>
       </div>
     </div>
