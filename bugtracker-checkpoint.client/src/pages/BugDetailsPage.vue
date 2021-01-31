@@ -17,7 +17,7 @@
             {{ state.activeBug.description }}
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione optio corrupti neque similique eveniet fugit at iste incidunt unde? Quasi, tempore quo delectus iste voluptas maiores placeat magnam? Repudiandae, voluptatem?
           </p>
-          <button type="button" class="btn btn-danger">
+          <button v-if="!state.activeBug.closed" type="button" class="btn btn-danger" @click="closeBug">
             Close Bug
           </button>
         </div>
@@ -49,6 +49,7 @@ import { logger } from '../utils/Logger'
 import bugsService from '../services/BugsService'
 import notesService from '../services/NotesService'
 import { onBeforeRouteLeave, useRoute } from 'vue-router'
+import NotificationService from '../services/NotificationService'
 export default {
   name: 'BugDetails',
   setup() {
@@ -71,7 +72,12 @@ export default {
     })
 
     return {
-      state
+      state,
+      async closeBug() {
+        if (await NotificationService.confirmAction(`Are you sure you want to close '${state.activeBug.title}'?`, 'Once closed, this bug cannot be reopened or edited.')) {
+          bugsService.closeBug(route.params.id)
+        }
+      }
     }
   }
 }
