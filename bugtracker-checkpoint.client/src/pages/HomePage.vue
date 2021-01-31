@@ -1,5 +1,5 @@
 <template>
-  <div class="home container-fluid">
+  <div class="home container">
     <div class="row">
       <div class="col">
         <h1>Bug Tracker</h1>
@@ -8,7 +8,7 @@
         </button>
       </div>
     </div>
-    <table class="table table-hover">
+    <table class="table table-hover table-bordered table-info">
       <thead>
         <tr>
           <th scope="col">
