@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="row">
-      <div class="col-12 card text-white bg-info mb-3">
+    <div class="row justify-content-center">
+      <div class="col-11 card text-white bg-info mb-3">
         <div class="card-header">
           Bug Details
         </div>
@@ -17,11 +17,27 @@
             {{ state.activeBug.description }}
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione optio corrupti neque similique eveniet fugit at iste incidunt unde? Quasi, tempore quo delectus iste voluptas maiores placeat magnam? Repudiandae, voluptatem?
           </p>
+          <button type="button" class="btn btn-danger">
+            Close Bug
+          </button>
         </div>
       </div>
-      <div class="row">
-        <NoteComponent v-for="note in state.notes" :key="note.id" :note-prop="note" />
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for=""></label>
+          <input type="text"
+                 class="form-control"
+                 name="newNoteInput"
+                 id="newNoteInput"
+                 aria-describedby="helpId"
+                 placeholder="Add note"
+          >
+          <small id="helpId" class="form-text text-muted">Help text</small>
+        </div>
       </div>
+      <NoteComponent v-for="note in state.notes" :key="note.id" :note-prop="note" />
     </div>
   </div>
 </template>
