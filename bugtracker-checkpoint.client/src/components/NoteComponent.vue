@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import notesService from '../services/NotesService'
-import { logger } from '../utils/Logger'
 export default {
   name: 'NoteComponent',
   props: {
@@ -14,14 +12,7 @@ export default {
   },
   setup(props) {
     return {
-      async getNotesByBugId() {
-        try {
-          logger.log(props.noteProp.bug)
-          await notesService.getNotesByBugId(props.noteProp.bug)
-        } catch (error) {
-          logger.error(error)
-        }
-      }
+
     }
   }
 }

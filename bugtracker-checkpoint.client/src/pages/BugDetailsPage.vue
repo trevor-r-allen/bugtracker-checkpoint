@@ -24,6 +24,7 @@ import { computed, onBeforeMount, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import bugsService from '../services/BugsService'
+import notesService from '../services/NotesService'
 import { onBeforeRouteLeave, useRoute } from 'vue-router'
 export default {
   name: 'BugDetails',
@@ -36,6 +37,7 @@ export default {
     onBeforeMount(async() => {
       try {
         await bugsService.getBugById(route.params.id)
+        await notesService.getNotesByBugId(route.params.id)
       } catch (error) {
         logger.error(error)
       }
