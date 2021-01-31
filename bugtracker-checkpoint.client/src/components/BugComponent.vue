@@ -1,7 +1,9 @@
 <template>
   <tr>
     <th scope="row">
-      {{ bugProp.title }}
+      <router-link :to="{name: 'BugDetails', params: {id: bugProp.id}}">
+        {{ bugProp.title }}
+      </router-link>
     </th>
     <td>{{ bugProp.description }}</td>
     <td v-if="bugProp.creator">
