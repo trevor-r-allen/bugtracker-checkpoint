@@ -1,20 +1,27 @@
 <template>
   <div class="container-fluid flex-grow-1 d-flex flex-column align-items-center justify-content-center">
     <div class="row">
-      <div class="col-12">
-        <h1>{{ state.activeBug.title }}</h1>
-        <h6 v-if="state.activeBug.creator">
-          Created by: {{ state.activeBug.creator.name }}
-        </h6>
-        <p>Status: {{ state.activeBug.closed ? 'Closed' : 'Open' }} <span v-if="state.activeBug.closedDate"> on {{ state.activeBug.closedDate }}</span></p>
+      <div class="col-12 card text-white bg-info mb-3">
+        <div class="card-header">
+          Bug Details
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ state.activeBug.title }}
+          </h5>
+          <h6 v-if="state.activeBug.creator">
+            Created by: {{ state.activeBug.creator.name }}
+          </h6>
+          <p>Status: {{ state.activeBug.closed ? 'Closed' : 'Open' }} <span v-if="state.activeBug.closedDate"> on {{ state.activeBug.closedDate }}</span></p>
+          <p class="card-text">
+            {{ state.activeBug.description }}
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione optio corrupti neque similique eveniet fugit at iste incidunt unde? Quasi, tempore quo delectus iste voluptas maiores placeat magnam? Repudiandae, voluptatem?
+          </p>
+        </div>
       </div>
-      <div class="col-12">
-        <h6>Details:</h6>
-        <p>{{ state.activeBug.description }}</p>
+      <div class="row">
+        <NoteComponent v-for="note in state.notes" :key="note.id" :note-prop="note" />
       </div>
-    </div>
-    <div class="row">
-      <NoteComponent v-for="note in state.notes" :key="note.id" :note-prop="note" />
     </div>
   </div>
 </template>
