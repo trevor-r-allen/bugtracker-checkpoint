@@ -1,6 +1,10 @@
 <template>
   <div class="col">
-    <h1>Note PlaceHolder</h1>
+    <h6 v-if="noteProp.creator">
+      {{ noteProp.creator.name }}
+    </h6>
+    <h6>{{ noteProp.flagged }}</h6>
+    <p>{{ noteProp.body }}</p>
   </div>
 </template>
 

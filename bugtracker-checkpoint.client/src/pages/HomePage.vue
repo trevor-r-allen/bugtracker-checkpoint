@@ -1,11 +1,37 @@
 <template>
   <div class="home container">
     <div class="row">
-      <div class="col">
+      <div class="col-5">
         <h1>Bug Tracker</h1>
+      </div>
+      <div class="col offset-5 d-flex align-items-center justify-content-around">
         <button type="button" class="btn btn-primary">
           Create
         </button>
+      </div>
+      <div class="col-12 d-flex align-items-center justify-content-end">
+        <div class="dropdown">
+          <button class="btn btn-info dropdown-toggle"
+                  type="button"
+                  id="dropdownMenu2"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+          >
+            Filter by
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button" @click="filterOpen">
+              Open
+            </button>
+            <button class="dropdown-item" type="button" @click="filterClosed">
+              Closed
+            </button>
+            <button class="dropdown-item" type="button" @click="filterAll">
+              All
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <table class="table table-hover table-bordered table-info">
@@ -28,8 +54,8 @@
           </th>
         </tr>
       </thead>
-      <tbody>
-        <BugComponent v-for="bug in state.bugs" :key="bug.id" :bug-prop="bug" />
+      <tbody id="BugTableBody">
+        <BugComponent v-for="bug in state.filteredBugs" :key="bug.id" :bug-prop="bug" />
       </tbody>
     </table>
   </div>
@@ -44,17 +70,28 @@ export default {
   name: 'Home',
   setup() {
     const state = reactive({
-      bugs: computed(() => AppState.bugs)
+      bugs: computed(() => AppState.bugs),
+      filteredBugs: []
     })
     onBeforeMount(async() => {
       try {
         await bugsService.getAllBugs()
+        state.filteredBugs = state.bugs
       } catch (error) {
         logger.error(error)
       }
     })
     return {
-      state
+      state,
+      filterOpen() {
+        state.filteredBugs = state.bugs.filter(bug => !bug.closed)
+      },
+      filterClosed() {
+        state.filteredBugs = state.bugs.filter(bug => bug.closed)
+      },
+      filterAll() {
+        state.filteredBugs = state.bugs
+      }
     }
   }
 }
