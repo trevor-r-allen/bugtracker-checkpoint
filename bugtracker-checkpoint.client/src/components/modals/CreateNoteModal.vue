@@ -43,9 +43,11 @@
 import { reactive } from 'vue'
 import { logger } from '../../utils/Logger'
 import notesService from '../../services/NotesService'
+import { useRoute } from 'vue-router'
 export default {
   name: 'CreateNoteModal',
   setup() {
+    const route = useRoute()
     const state = reactive({
       newNote: {}
     })
@@ -53,6 +55,7 @@ export default {
       state,
       async createNote() {
         try {
+          state.newNote.bug = (route.params.id)
           await notesService.createNote(state.newNote)
           state.newNote = {}
           document.getElementById('closeModal').click()
