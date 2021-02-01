@@ -31,17 +31,11 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <div class="form-group">
-          <label for=""></label>
-          <input type="text"
-                 class="form-control"
-                 name="newNoteInput"
-                 id="newNoteInput"
-                 aria-describedby="helpId"
-                 placeholder="Add note"
-          >
-          <small id="helpId" class="form-text text-muted">Help text</small>
-        </div>
+        <!-- Button trigger modal -->
+        <button v-if="!state.activeBug.closed" type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#createNoteModal">
+          Add Note
+        </button>
+        <CreateNoteModal />
       </div>
       <NoteComponent v-for="note in state.notes" :key="note.id" :note-prop="note" />
     </div>
