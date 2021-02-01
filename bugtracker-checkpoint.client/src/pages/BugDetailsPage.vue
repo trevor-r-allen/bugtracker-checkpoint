@@ -9,7 +9,7 @@
             <button v-if="!state.activeBug.closed" type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editBugModal">
               Edit
             </button>
-            <EditBugModal />
+            <EditBugModal :account-prop="state.account" />
           </div>
           <div class="card-body">
             <h5 class="card-title">

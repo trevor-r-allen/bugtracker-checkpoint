@@ -54,7 +54,10 @@ import bugsService from '../../services/BugsService'
 import { useRoute } from 'vue-router'
 export default {
   name: 'EditBugModal',
-  setup() {
+  props: {
+    accountProp: { type: Object, required: true }
+  },
+  setup(props) {
     const route = useRoute()
     const state = reactive({
       editedBug: computed(() => AppState.activeBug),
@@ -64,7 +67,9 @@ export default {
       state,
       async editBug() {
         try {
-          await bugsService.editBug(route.params.id, state.editedBug)
+          if (props.accountProp.id === state.activeBug.creatorId) {
+            await bugsService.editBug(route.params.id, state.editedBug)
+          }
           document.getElementById('closeModal').click()
         } catch (error) {
           logger.error(error)
