@@ -37,7 +37,7 @@
         </button>
         <CreateNoteModal />
       </div>
-      <NoteComponent v-for="note in state.notes" :key="note.id" :note-prop="note" />
+      <NoteComponent v-for="note in state.notes" :key="note.id" :note-prop="note" :bug-prop="state.activeBug" />
     </div>
   </div>
 </template>
@@ -75,7 +75,7 @@ export default {
     return {
       state,
       async closeBug() {
-        if (await NotificationService.confirmAction(`Are you sure you want to close '${state.activeBug.title}'?`, 'Once closed, this bug cannot be reopened or edited.')) {
+        if (await NotificationService.confirmAction(`Are you sure you want to close '${state.activeBug.title}'?`, 'Once closed, this bug cannot be reopened or edited.', 'Close Bug')) {
           bugsService.closeBug(route.params.id)
         }
       }
