@@ -13,7 +13,7 @@
           <h5 class="modal-title" id="editBugModal">
             Edit Bug Details
           </h5>
-          <button id="closeModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button id="closeEditBugModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -70,7 +70,7 @@ export default {
           if (props.accountProp.id === state.activeBug.creatorId) {
             await bugsService.editBug(route.params.id, state.editedBug)
           }
-          document.getElementById('closeModal').click()
+          document.getElementById('closeEditBugModal').click()
         } catch (error) {
           logger.error(error)
         }

@@ -5,7 +5,7 @@
         {{ bugProp.title }}
       </router-link>
     </th>
-    <td>{{ bugProp.description }}</td>
+    <td>{{ bugProp.description.slice(0, 20) }}</td>
     <td v-if="bugProp.creator">
       {{ bugProp.creator.name }}
     </td>

@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-11">
         <div class="card text-dark border-info bg-transparent mb-3">
-          <div class="card-header  border-info d-flex justify-content-between">
+          <div class="card-header border-info d-flex justify-content-between">
             <h6> Bug Details </h6>
             <!-- Button trigger modal -->
             <button v-if="!state.activeBug.closed" type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editBugModal">

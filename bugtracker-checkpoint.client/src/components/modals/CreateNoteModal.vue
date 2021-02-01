@@ -13,7 +13,7 @@
           <h5 class="modal-title" id="createNoteModal">
             Create A New Note
           </h5>
-          <button id="closeModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button id="closeCreateNoteModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -58,7 +58,7 @@ export default {
           state.newNote.bug = (route.params.id)
           await notesService.createNote(state.newNote)
           state.newNote = {}
-          document.getElementById('closeModal').click()
+          document.getElementById('closeCreateNoteModal').click()
         } catch (error) {
           logger.error(error)
         }

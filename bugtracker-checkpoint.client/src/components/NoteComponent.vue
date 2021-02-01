@@ -1,13 +1,21 @@
 <template>
-  <div class="col-10">
-    <h6 v-if="noteProp.creator">
-      {{ noteProp.creator.name }}
-    </h6>
-    <h6>{{ noteProp.flagged }}</h6>
-    <p>{{ noteProp.body }}</p>
-  </div>
-  <div class="col-2">
-    <i v-if="!bugProp.closed && bugProp.creatorId === state.account.id" class="fa fa-times text-danger" aria-hidden="true" @click="deleteNote"></i>
+  <div class="col-12 card bg-transparent border-info my-1">
+    <div class="row d-flex justify-content-between align-items-center">
+      <div class="col-10">
+        <h6>{{ noteProp.flagged }}</h6>
+        <h6>
+          {{ noteProp.body }}
+        </h6>
+        <p v-if="noteProp.creator">
+          {{ noteProp.creator.name }}
+        </p>
+      </div>
+      <div class="col-2 text-center">
+        <h1>
+          <i v-if="!bugProp.closed && bugProp.creatorId === state.account.id" class="fa fa-times text-danger" aria-hidden="true" @click="deleteNote"></i>
+        </h1>
+      </div>
+    </div>
   </div>
 </template>
 
