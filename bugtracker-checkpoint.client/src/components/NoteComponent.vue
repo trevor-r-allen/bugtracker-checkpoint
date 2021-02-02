@@ -12,7 +12,7 @@
       </div>
       <div class="col-2 text-center">
         <h1>
-          <i v-if="!bugProp.closed && bugProp.creatorId === state.account.id" class="fa fa-times text-danger" aria-hidden="true" @click="deleteNote"></i>
+          <i v-if="!bugProp.closed && noteProp.creatorId === state.account.id" class="fa fa-times text-danger" aria-hidden="true" @click="deleteNote"></i>
         </h1>
       </div>
     </div>
